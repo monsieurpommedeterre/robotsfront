@@ -97,7 +97,12 @@ button:hover {
 
 .robot-summary-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
+}
+.robot-summary-container > p {
+    color: white;
 }
 
 .robot-summary-item {
@@ -194,4 +199,9 @@ button:hover {
 
 .robot-detail .robot-logo {
     max-width: 150px;
+}
+
+.warning-message {
+    color: white;
+    text-align: center;
 }

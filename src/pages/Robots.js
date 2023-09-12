@@ -9,6 +9,7 @@ function RobotsPage() {
   const navigate = useNavigate();
   const [addRobotDisabled, setAddRobotDisabled] = useState(false)
   const [deleteRobotDisabled, setDeleteRobotDisabled] = useState(false)
+  const [warningMessage, setWarningMessage] = useState('')
 
   const dispatch = useDispatch()
   const robots = useSelector((state) => state.robots.value)
@@ -32,7 +33,12 @@ function RobotsPage() {
         .then(response => response.json())
         .then(data => {
           setAddRobotDisabled(false)
-          dispatch(addRobotFromStore(data.robot));
+          if(data.result) {
+            setWarningMessage('')
+            dispatch(addRobotFromStore(data.robot));
+          } else {
+            setWarningMessage(data.message)
+          }
           console.log("data", data)
         });
   }
@@ -47,7 +53,8 @@ function RobotsPage() {
         .then(response => response.json())
         .then(data => {
           setDeleteRobotDisabled(false)
-          dispatch(deleteRobotFromStore(robotId));
+          dispatch(deleteRobotFromStore(robotId))
+          setWarningMessage('')
           console.log("data", data)
         });
   }
@@ -71,8 +78,9 @@ function RobotsPage() {
           <button className="addrobot-button" disabled={addRobotDisabled} onClick={() => addRobot() }><span>Create<br/>Robot</span></button>
         </div>
         </div>
+      <p className="warning-message">{warningMessage}</p>
       <div className="robot-summary-container">
-        {fetchedRobotsList}
+        {fetchedRobotsList.length?fetchedRobotsList:<p>No robots yet, create some, you're the boss !</p>}
       </div>
     </div>
   );
