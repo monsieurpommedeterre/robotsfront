@@ -22,8 +22,9 @@ function Battery({batteryLevel}) {
 
     return (
       <div className="battery">
-        <p>{batteryLevel}</p>
-        <FontAwesomeIcon icon={batteryIcon} />
+        <p>battery : </p>
+        <p className="battery-level">{batteryLevel}%</p>
+        <FontAwesomeIcon className="battery-icon" icon={batteryIcon} />
       </div>
     );
   }

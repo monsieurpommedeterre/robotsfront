@@ -1,3 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,900;1,900&display=swap');
+
+:root {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    margin: 0px;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 15px;
+}
+
+button:hover {
+    background-color: black;
+    border-color: transparent;
+    color: white;
+}
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-page h1 {
+    font-style: italic;
+}
+
+.main-page img {
+    max-width: 350px;
+}
+
+.robots-menu {
+    background-color: white;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.addrobot-container {
+    flex: 1;
+    text-align: center;
+}
+
 .robots-container {
-    background-color: pink;
+    background-color: black;
+    min-height: 100vh;
+}
+
+.addrobot-button, .robot-detail button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.addrobot-button:disabled {
+    cursor: progress;
+    background-color: grey;
+}
+
+.addrobot-button:hover, .robot-detail button:hover {
+    line-height: 50px;
+}
+
+.addrobot-button:hover::after {
+    content: '+';
+    font-weight: 900;
+    font-size: 42px;
+}
+
+.robot-detail button .icon {
+    display: none;
+}
+
+.robot-detail button:hover .text {
+    display: none;
+}
+
+.robot-detail button:hover .icon {
+    display: flex;
+    justify-content: center;
+    font-size: 42px;
+}
+
+.addrobot-button:hover span {
+    display: none;
+}
+
+.robot-summary-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.robot-summary-item {
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.robot-summary-card {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.robot-summary-item button {
+    background-color: white;
+    text-transform: capitalize;
+}
+
+.robot-summary-item button:hover {
+    color: white;
+    background-color: black;
+}
+.robot-summary-item button:disabled {
+    color: white;
+    background-color: grey;
+    cursor: progress;
+}
+
+.robot-summary-item-clickable {
+    cursor: pointer;
+}
+
+.robot-summary div {
+    font-weight: 300;
+}
+
+.robot-summary > p {
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.robot-summary .battery {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 300;
+}
+
+.battery-level {
+    font-weight: 400;
+}
+
+.robot-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.robot-detail h2 {
+    text-transform: capitalize;
+    font-size: 52px;
+    border-bottom: 3px solid black;
+    padding-bottom: 10px;
+}
+
+.robot-detail .battery {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 300;
+    font-size: 18px;
+}
+.robot-detail > p{
+    background-color: black;
+    padding: 10px;
+    color: white;
+    font-size: 24px;
+}
+
+.robot-detail .battery-icon {
+    margin-left: 10px;
+    font-size: 24px;
+}
+
+.robot-detail button:disabled {
+    color: white;
+    background-color: grey;
+    cursor: progress;
 }

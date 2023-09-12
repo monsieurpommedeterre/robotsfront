@@ -53,19 +53,27 @@ function RobotsPage() {
   }
 
   const fetchedRobotsList = robots.map((robot, index) =>
-  <div key={index} >
-  <div onClick={()=> navigate(`/robot/${robot._id}`)}>
-    <RobotSummary robotName={robot.name} batteryLevel={robot.batteryLevel} />
-  </div>
-  <button disabled={deleteRobotDisabled} onClick={() => deleteRobot(robot._id)}>Destroy Robot</button>
+  <div className="robot-summary-item">
+    <div key={index} className="robot-summary-card" onClick={()=>  navigate(`/robot/${robot._id}`)}>
+      <RobotSummary robotName={robot.name} batteryLevel={robot.batteryLevel} />
+    </div>
+    <button disabled={deleteRobotDisabled} onClick={() => deleteRobot(robot._id)}>Destroy Robot</button>
   </div>
   )
 
   return (
     <div className="robots-container">
-      <button onClick={() => navigate("/")}>Go Home</button>
-      <button disabled={addRobotDisabled} onClick={() => addRobot() }>Create Robot</button>
-      {fetchedRobotsList}
+      <div className="robots-menu">
+        <div>
+          <button className="gohome-button" onClick={() => navigate("/")}>Go Home</button>
+        </div>
+        <div className="addrobot-container">
+          <button className="addrobot-button" disabled={addRobotDisabled} onClick={() => addRobot() }><span>Create<br/>Robot</span></button>
+        </div>
+        </div>
+      <div className="robot-summary-container">
+        {fetchedRobotsList}
+      </div>
     </div>
   );
 }
