@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/robotsfront/static/css/main.608b6784.css",
+    "main.js": "/robotsfront/static/js/main.d12f3ea3.js",
+    "index.html": "/robotsfront/index.html",
+    "main.608b6784.css.map": "/robotsfront/static/css/main.608b6784.css.map",
+    "main.d12f3ea3.js.map": "/robotsfront/static/js/main.d12f3ea3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.608b6784.css",
+    "static/js/main.d12f3ea3.js"
+  ]
+}
