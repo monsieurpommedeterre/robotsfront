@@ -23,9 +23,12 @@ import Robots from "./pages/Robots";
 import Robot from "./pages/Robot";
 import NoPage from "./pages/NoPage";
 import './global.css';
+import store from './store'
+import { Provider } from 'react-redux'
 
 export default function App() {
   return (
+    <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/" index element={<Home />} />
@@ -34,6 +37,7 @@ export default function App() {
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
+    </Provider>
   );
 }
 

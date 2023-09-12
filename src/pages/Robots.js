@@ -1,23 +1,26 @@
 import RobotSummary from '../components/RobotSummary'
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { setStoreRobots} from '../features/robots/robotsSlice'
 
 function RobotsPage() {
 
   const navigate = useNavigate();
-  const [robots, setRobots] = useState([])
   const [addRobotDisabled, setAddRobotDisabled] = useState(false)
   const [deleteRobotDisabled, setDeleteRobotDisabled] = useState(false)
 
+  const dispatch = useDispatch()
+  const robots = useSelector((state) => state.robots.value)
   useEffect(() => {
 
     fetch(`https://robotsapi.vercel.app/getrobots`)
       .then(response => response.json())
       .then(data => {
         console.log("data", data)
-        setRobots(data.robots);
+        dispatch(setStoreRobots(data.robots));
       });
-  }, []);
+  }, [dispatch]);
 
   const addRobot = () => {
     setAddRobotDisabled(true)
