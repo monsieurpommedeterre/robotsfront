@@ -10,6 +10,11 @@ function RobotDetail({robotName, batteryLevel, robotDescription, robotId}) {
     const [chargeDisabled, setChargeDisabled] = useState(false)
     const dispatch = useDispatch()
 
+    const robotLogoRandom = () => {
+        const rand = Math.floor(Math.random()*5)+1
+        return `/robot_${rand}.png`
+    }
+
     function chargeBot() {
         setChargeDisabled(true)
         fetch(`https://robotsapi.vercel.app/chargerobot/${robotId}`,
@@ -28,6 +33,7 @@ function RobotDetail({robotName, batteryLevel, robotDescription, robotId}) {
     return (
       <div className="robot-detail">
         <h2>{robotName}</h2>
+        <img className="robot-logo" src={robotLogoRandom()} alt="robot_logo" />
         <p>{robotDescription}</p>
         <Battery batteryLevel={batteryLevel} />
         <button disabled={chargeDisabled} onClick={() => chargeBot()}><span className="text">Charge BOT !</span><span className="icon"><FontAwesomeIcon icon={faBolt} /></span></button>
