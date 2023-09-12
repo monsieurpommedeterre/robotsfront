@@ -6,6 +6,8 @@ function RobotsPage() {
 
   const navigate = useNavigate();
   const [robots, setRobots] = useState([])
+  const [addRobotDisabled, setAddRobotDisabled] = useState(false)
+  const [deleteRobotDisabled, setDeleteRobotDisabled] = useState(false)
 
   useEffect(() => {
 
@@ -17,14 +19,48 @@ function RobotsPage() {
       });
   }, []);
 
-  const fetchedRobots = robots.map((robot, index) => 
-  <div key={index} onClick={()=> navigate(`/robot/${robot._id}`)}>
+  const addRobot = () => {
+    setAddRobotDisabled(true)
+        fetch(`https://robotsapi.vercel.app/addrobot`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'}
+        })
+        .then(response => response.json())
+        .then(data => {
+          setAddRobotDisabled(false)
+          console.log("data", data)
+        });
+  }
+
+  const deleteRobot = (robotId) => {
+    setDeleteRobotDisabled(true)
+        fetch(`https://robotsapi.vercel.app/deleterobot/${robotId}`,
+        {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json'}
+        })
+        .then(response => response.json())
+        .then(data => {
+          setDeleteRobotDisabled(false)
+          console.log("data", data)
+        });
+  }
+
+  const fetchedRobotsList = robots.map((robot, index) =>
+  <div key={index} >
+  <div onClick={()=> navigate(`/robot/${robot._id}`)}>
     <RobotSummary robotName={robot.name} batteryLevel={robot.batteryLevel} />
-  </div>)
+  </div>
+  <button disabled={deleteRobotDisabled} onClick={() => deleteRobot(robot._id)}>Delete Robot</button>
+  </div>
+  )
 
   return (
     <div className="robots-container">
-      {fetchedRobots}
+      <button onClick={() => navigate("/")}>Go Home</button>
+      <button disabled={addRobotDisabled} onClick={() => addRobot() }>Add Robot</button>
+      {fetchedRobotsList}
     </div>
   );
 }

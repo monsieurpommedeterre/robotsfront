@@ -28,7 +28,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route patj="/" index element={<Home />} />
+        <Route path="/" index element={<Home />} />
         <Route path="robots" element={<Robots />} />
         <Route path="robot/:robotid" element={<Robot />} />
         <Route path="*" element={<NoPage />} />
