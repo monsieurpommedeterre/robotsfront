@@ -2,7 +2,7 @@ import RobotSummary from '../components/RobotSummary'
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { setStoreRobots} from '../features/robots/robotsSlice'
+import { setRobotsFromStore, addRobotFromStore, deleteRobotFromStore } from '../features/robots/robotsSlice'
 
 function RobotsPage() {
 
@@ -18,7 +18,7 @@ function RobotsPage() {
       .then(response => response.json())
       .then(data => {
         console.log("data", data)
-        dispatch(setStoreRobots(data.robots));
+        dispatch(setRobotsFromStore(data.robots));
       });
   }, [dispatch]);
 
@@ -32,6 +32,7 @@ function RobotsPage() {
         .then(response => response.json())
         .then(data => {
           setAddRobotDisabled(false)
+          dispatch(addRobotFromStore(data.robot));
           console.log("data", data)
         });
   }
@@ -46,6 +47,7 @@ function RobotsPage() {
         .then(response => response.json())
         .then(data => {
           setDeleteRobotDisabled(false)
+          dispatch(deleteRobotFromStore(robotId));
           console.log("data", data)
         });
   }
@@ -55,14 +57,14 @@ function RobotsPage() {
   <div onClick={()=> navigate(`/robot/${robot._id}`)}>
     <RobotSummary robotName={robot.name} batteryLevel={robot.batteryLevel} />
   </div>
-  <button disabled={deleteRobotDisabled} onClick={() => deleteRobot(robot._id)}>Delete Robot</button>
+  <button disabled={deleteRobotDisabled} onClick={() => deleteRobot(robot._id)}>Destroy Robot</button>
   </div>
   )
 
   return (
     <div className="robots-container">
       <button onClick={() => navigate("/")}>Go Home</button>
-      <button disabled={addRobotDisabled} onClick={() => addRobot() }>Add Robot</button>
+      <button disabled={addRobotDisabled} onClick={() => addRobot() }>Create Robot</button>
       {fetchedRobotsList}
     </div>
   );

@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Battery from "./Battery";
+import { useDispatch } from 'react-redux'
+import { updateRobotChargeFromStore } from '../features/robots/robotsSlice'
 
 function RobotDetail({robotName, batteryLevel, robotDescription, robotId}) {
 
     const [chargeDisabled, setChargeDisabled] = useState(false)
+    const dispatch = useDispatch()
 
     function chargeBot() {
         setChargeDisabled(true)
@@ -15,6 +18,7 @@ function RobotDetail({robotName, batteryLevel, robotDescription, robotId}) {
         .then(response => response.json())
         .then(data => {
             setChargeDisabled(false)
+            dispatch(updateRobotChargeFromStore(robotId))
             console.log("data", data)
         });
     }
