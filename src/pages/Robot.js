@@ -1,18 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import RobotDetail from '../components/RobotDetail';
 
 function RobotPage() {
+
+  const [robot, setRobot] = useState({})
   const params = useParams()
   const navigate = useNavigate()
   const robots = useSelector((state) => state.robots.value)
-  const robot = robots.find(robot => robot._id === params.robotid)
-
+  
   useEffect(() => {
-    console.log("id", params.robotid)
-    // robots.filter(robot => robot._id === route._id)
-  }, [params.robotid]);
+    const robotFinder = robots.find(robot => robot._id === params.robotid)
+    if(robotFinder) {
+      setRobot(robotFinder)
+    } else {
+      navigate("/nopage")
+    }
+  }, [params.robotid, robots, navigate]);
 
     return (
       <div className="robot-container">
